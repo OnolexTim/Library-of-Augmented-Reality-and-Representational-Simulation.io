@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+
+    <script>
+        AFRAME.registerComponent('play-pause', {
+            init: function() {
+                var myVideo = document.querySelector('#second-law');
+                var videoControls = document.querySelector('#videoControls');
+                this.el.addEventListener('click', function() {
+                    if (myVideo.paused) {
+                        myVideo.play();
+                        videoControls.setAttribute('src', '#play');
+                    }
+                })
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="floor" src="img/floor.jpg" alt="">
+            <img id="sky" src="img/sky.jpg" alt="">
+            <img id="brick" src="img/TexturesCom_BrickSmallNew0122_M.jpg" alt="">
+            <img id="doors" src="img/TexturesCom_DoorsOrnate0407_1_M.jpg" alt="">
+            <img id="play" src="img/play.png" alt="">
+            <img id="pause" src="img/pause.jpg" alt="">
+            <video src="first-law (2).mp4" id="second-law" loop="true"></video>
+
+        </a-assets>
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+
+        <a-video src="#second-law" width="18" height="18" position="0 3 9"></a-video>
+        <a-image id="videoControls" src="#play" position="0 1 -2" scale="0 -3 0" scale="0.5 0.5 1" play-pause></a-image>
+
+        <a-sky src="#sky" rotation="0 64 0"></a-sky>
+        <!--Ground-->
+        <a-plane material="color: #999999;
+    src:#floor;
+    repeat:5000 5000;" rotation="-90 0 0
+    normal-map: #floor" scale="10000 10000 1"></a-plane>
+
+        <a-entity position="0 0 8">
+            <a-camera></a-camera>
+        </a-entity>
+
+        <!--a-box primitive-->
+        <a-box color="#008000" width="4" height="2" depth="0.2" position="0 3 -5" rotation="110 5 0" scale="2 1 1">
+            <!-- a-circle inside the a-box primitive. Like a child entity-->
+            <a-circle color="#f73bbf" position="2 0.7 -0.04" side="double" rotation="80 0 0"></a-circle>
+        </a-box>
+        <a-circle color="#f73bbf" side="double" position="-2 3 -5">
+        </a-circle>
+
+        <a-cylinder color="#301b1b" height="3" radius="2" segments-radial="6" open-ended="true" side="double" position="0 3 2" rotation="0 -90 100" scale="3 2 2"></a-cylinder>
+        <a-entity rotation="0 3 0" animation="property: rotation; to: 0 360 10; loop: true; dur: 10000">
+            <a-box position="0.5 10 10" color="red" width="4" height="6" depth="2" side="double"></a-box>
+        </a-entity>
+
+        <a-box color="darkgrey" width="20" height="10" depth="0.2" position="-30 3 -5" rotation="0 0 0" scale="2 1 1" side="double" src="#brick">
+            <a-box color="dark" width="2" height="8" depth="0.1" position="0 0 4" rotation="0 90 0" scale="2 1 1" side="double" src="#doors">
+            </a-box>
+
+
+
+
+            <a-video src="#second-law" width="8" height="8" position="6 3 -9"></a-video>
+            <a-image id="videoControls" src="#play" position="0 1 -2" scale="0 -3 0" scale="0.5 0.5 1" play-pause></a-image>
+    </a-scene>
+</body>
+
+
+</html>
